@@ -1,0 +1,41 @@
+{
+  "variables": {
+    "aws_access_key": "AKIAUOSTY2F6EDLN6AUG",
+    "aws_secret_key": "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",
+    "aws_region": "us-east-1",
+    "usuario":"cajecasu"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "{{user `aws_region`}}",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "ubuntu/images/*ubuntu-bionic-18.04-amd64-server-*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "app-{{user `usuario`}}-{{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "{{ template_dir }}/assets",
+      "destination": "/tmp/assets/"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "chmod 755 /tmp/assets/prueba.sh && /tmp/assets/prueba.sh 'devsecops' "
+      ]
+    }
+  ]
+}
