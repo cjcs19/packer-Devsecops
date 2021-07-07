@@ -1,7 +1,7 @@
 {
   "variables": {
-    "aws_access_key": "AKIAUOSTY2F6EDLN6AUG",
-    "aws_secret_key": "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",
+    "aws_access_key": "xxxx",
+    "aws_secret_key": "xxxxx",
     "aws_region": "us-east-1",
     "usuario":"cajecasu"
   },
