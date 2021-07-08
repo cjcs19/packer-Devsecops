@@ -34,7 +34,7 @@
     {
       "type": "shell",
       "inline": [
-        "chmod 755 /tmp/assets/installjenkin.sh && /tmp/assets/installjenkin.sh "
+        "chmod 755 /tmp/assets/installjenkin.sh && sudo /tmp/assets/installjenkin.sh "
       ]
     }
   ]

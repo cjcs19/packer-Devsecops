@@ -4,28 +4,27 @@
 set -ex
 
 
-apt update
-
-apt install -y default-jre
+apt-get update
+apt-get install -y default-jre
 
 
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 
 
-sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 
 
-sudo apt update
+apt update
 
 
-sudo apt install -y jenkins
+apt install -y jenkins
 
 
-sudo systemctl start jenkins
+systemctl start jenkins
 
-sudo systemctl status jenkins
+systemctl status jenkins
 
-sudo ufw allow 8080
+ufw allow 8080
 
 
-sudo ufw status
+ufw status
