@@ -4,9 +4,9 @@
 set -ex
 
 
-sudo apt update
+apt update
 
-sudo apt install -y default-jre
+apt install -y default-jre
 
 
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
