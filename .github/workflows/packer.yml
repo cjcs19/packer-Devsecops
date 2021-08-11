@@ -11,6 +11,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ USUARIO.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ USUARIO.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          
 
       # validate templates
       - name: Validate Template
