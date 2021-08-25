@@ -15,8 +15,11 @@ pipeline {
     stage('Create Packer AMI') {
         steps {
             withAWS(credentials: 'aws-service-devsecops'){
+                sh 'rm -rf ./manifest.json'
                 sh 'packer build -var aws_access_key=${AWS_KEY} -var aws_secret_key=${AWS_SECRET} packer/ec2simple.json'
+                sh 'cat ./manifest.json | jq -r ".builds[-1].artifact_id" > manifestDepurado'
                 sh 'AMILAST=`cat ./manifest.json | jq -r ".builds[-1].artifact_id" |  cut -d":" -f2`'
+                sh 'cat ./manifestDepurado| cud -d":" -f2'
             }
       }
     }
