@@ -8,6 +8,8 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm install'
+        sh 'apt-get update'
+        sh 'apt-get install jq'
       }
     }
     stage('Create Packer AMI') {
