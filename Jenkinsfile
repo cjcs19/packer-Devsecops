@@ -24,8 +24,7 @@ pipeline {
     }
     stage ('DEPLOY New AMI') {
         steps {
-            sh 'jq --version'
-            withCredentials(credentials: 'aws-service-devsecops') {
+            withAWS(credentials: 'aws-service-devsecops') {
                 sh '''
 
                     AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2)
@@ -40,12 +39,6 @@ pipeline {
 
                 '''
             }
-
-            /*sh 'AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2) && export VARAMI=$AMIID'
-            withCredentials(credentials: 'aws-service-devsecops') {
-                sh 'https://github.com/cjcs19/terrafordevsecops.git'
-                sh 'cd terrafordevsecops '
-            */
         }
     }
   }
