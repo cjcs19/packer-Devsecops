@@ -25,9 +25,19 @@ pipeline {
     stage ('DEPLOY New AMI') {
         steps {
             sh 'jq --version'
-            sh 'AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2) && export VARAMI=$AMIID'
-            sh "env"
+            sh script: """\
+                foo='bar' \
+                echo $foo \
+                AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2) && export VARAMI=$AMIID
 
+                echo $AMIID
+            """, returnStdout: true
+
+            /*sh 'AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2) && export VARAMI=$AMIID'
+            withCredentials(credentials: 'aws-service-devsecops') {
+                sh 'https://github.com/cjcs19/terrafordevsecops.git'
+                sh 'cd terrafordevsecops '
+            */
         }
     }
   }
