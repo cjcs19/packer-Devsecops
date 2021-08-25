@@ -14,7 +14,7 @@ pipeline {
         steps {
             withAWS(credentials: 'aws-service-devsecops'){
                 sh 'packer build -var aws_access_key=${AWS_KEY} -var aws_secret_key=${AWS_SECRET} packer/ec2simple.json'
-                sh 'AMILAST=`cat ./manifest.json | jq -r '.builds[-1].artifact_id' |  cut -d':' -f2`'
+                sh 'AMILAST=`cat ./manifest.json | jq -r ".builds[-1].artifact_id" |  cut -d":" -f2`'
             }
       }
     }
