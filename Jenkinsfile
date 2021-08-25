@@ -25,10 +25,8 @@ pipeline {
     stage ('DEPLOY New AMI') {
         steps {
             sh 'jq --version'
-            def AMIID = sh label: '', returnStdout: true, script: 'echo "jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2'
-
             sh 'AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2)'
-            sh "echo $AMIID"
+            sh "echo var.$AMIID"
 
         }
     }
