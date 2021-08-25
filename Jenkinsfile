@@ -33,8 +33,12 @@ pipeline {
                     git clone https://github.com/cjcs19/terrafordevsecops.git
 
                     cd terrafordevsecops
+                    git pull
 
-                    ls
+                    sed -i "s/AWIAWS/$AMIID/g" terraform.tfvars
+
+                    terraform init
+                    terraform apply -auto-approve 
 
 
                 '''
