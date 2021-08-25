@@ -14,6 +14,7 @@ pipeline {
         steps {
             withAWS(credentials: 'aws-service-devsecops'){
                 sh 'packer build -var aws_access_key=${AWS_KEY} -var aws_secret_key=${AWS_SECRET} packer/ec2simple.json'
+                sh 'pwd && find . && ls -lrt && ls -la'
             }
       }
     }
