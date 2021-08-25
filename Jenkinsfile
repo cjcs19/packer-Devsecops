@@ -24,10 +24,10 @@ pipeline {
     }
     stage ('DEPLOY New AMI') {
         steps {
-            sh "cat manifest.json|jq -r '.builds[-1].artifact_id'"
-            sh ' find .'
-            sh 'jq -r ".builds[-1].artifact_id" manifest.json | cut -d ":" -f2'
+            sh 'jq --version'
+            sh 'jq -r ".builds[-1].artifact_id" manifest.json'
             sh 'AMI_ID=$(jq -r ".builds[-1].artifact_id" manifest.json | cut -d ":" -f2)'
+            sh ' find .'
         }
     }
   }
