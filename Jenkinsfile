@@ -35,7 +35,7 @@ pipeline {
                     cd terrafordevsecops
                     git pull
 
-                    sed -i "s/AWIAWS/$AMIID/g" terraform.tfvars
+                    sed -i "s/AMIAWS/$AMIID/g" terraform.tfvars
 
                     terraform init
                     terraform apply -auto-approve
