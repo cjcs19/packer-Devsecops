@@ -19,14 +19,15 @@ pipeline {
                 //sh 'packer build -var aws_access_key=${AWS_KEY} -var aws_secret_key=${AWS_SECRET} packer/ec2simple.json'
                 sh 'ls -lrt'
 
+
             }
       }
     }
     stage ('DEPLOY New AMI') {
-        steps {
+          steps {
             withAWS(credentials: 'aws-service-devsecops') {
                 sh '''
-
+                    which terraform
                     AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2)
                     echo $AMIID
                     rm -rf terrafordevsecops
