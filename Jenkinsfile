@@ -29,7 +29,7 @@ pipeline {
 
                     AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2)
                     echo $AMIID
-
+                    rm -rf terrafordevsecops
                     git clone https://github.com/cjcs19/terrafordevsecops.git
 
                     cd terrafordevsecops
@@ -38,7 +38,7 @@ pipeline {
                     sed -i "s/AWIAWS/$AMIID/g" terraform.tfvars
 
                     terraform init
-                    terraform apply -auto-approve 
+                    terraform apply -auto-approve
 
 
                 '''
