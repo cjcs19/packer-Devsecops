@@ -12,11 +12,9 @@ pipeline {
     }
     stage('Create Packer AMI') {
         steps {
-          withCredentials([
-            credentials: 'aws-service-devsecops'
-          ]) {
-            sh 'packer build -var aws_access_key=${AWS_KEY} -var aws_secret_key=${AWS_SECRET} packer/ec2simple.json'
-        }
+            withAWS(credentials: 'aws-service-devsecops'){
+                sh 'packer build -var aws_access_key=${AWS_KEY} -var aws_secret_key=${AWS_SECRET} packer/ec2simple.json'
+            }
       }
     }
   }
