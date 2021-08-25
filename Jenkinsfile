@@ -27,7 +27,13 @@ pipeline {
           steps {
             withAWS(credentials: 'aws-service-devsecops') {
                 sh '''
-                    which terraform
+
+                    rm -rf /usr/local/bin/terraform
+                    wget https://releases.hashicorp.com/terraform/1.0.5/terraform_1.0.5_linux_amd64.zip
+                    unzip terraform_1.0.5_linux_amd64.zip
+                    cp terraform /usr/local/bin/terraform
+
+
                     AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2)
                     echo $AMIID
                     rm -rf terrafordevsecops
