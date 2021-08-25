@@ -28,9 +28,8 @@ pipeline {
             sh script: """\
                 foo='bar' \
                 echo $foo \
-                AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2) && export VARAMI=$AMIID
-
-                echo $AMIID
+                AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2) \
+                echo $AMIID \
             """, returnStdout: true
 
             /*sh 'AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2) && export VARAMI=$AMIID'
