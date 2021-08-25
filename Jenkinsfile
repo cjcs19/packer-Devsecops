@@ -36,7 +36,7 @@ pipeline {
                     git pull
 
                     sed -i "s/AMIAWS/$AMIID/g" terraform.tfvars
-
+                    terraform --version
                     terraform init
                     terraform apply -auto-approve
 
