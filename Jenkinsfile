@@ -26,7 +26,7 @@ pipeline {
         steps {
             sh 'jq --version'
             sh 'AMIID=$(jq -r ".builds[0].artifact_id" ./manifest.json| cut -d ":" -f2)'
-            sh "echo var.$AMIID"
+            sh "echo env.AMIID"
 
         }
     }
