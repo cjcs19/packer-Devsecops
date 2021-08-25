@@ -37,5 +37,12 @@
         "chmod 755 /tmp/assets/prueba.sh && /tmp/assets/prueba.sh 'devsecops' "
       ]
     }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+    }
   ]
 }
