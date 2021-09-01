@@ -28,11 +28,11 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: pjsonJ.json
+          target: packer/ec2simple.json
           
       # BUILD templates
       - name: BUILD PACKER Template
         uses: hashicorp/packer-github-actions@master
         with:
           command: build          
-          target: pjsonJ.json
+          target: packer/ec2simple.json
