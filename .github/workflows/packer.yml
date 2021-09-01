@@ -7,6 +7,8 @@ jobs:
   packer:
     runs-on: ubuntu-latest
     name: packer
+    environment:
+            name: pdn
 
     steps:
       - name: Checkout Repository
