@@ -2,18 +2,15 @@ name: Packer
 
 on:
   push:
+      branches: [ develop ]
 
 jobs:
   packer:
     runs-on: ubuntu-latest
     name: packer
+    environment:
+       name: qa
 
-    # if: endsWith(github.ref,'/develop')
-    # environment:
-    #   name: qa
-    # if: endsWith(github.ref,'/main')
-    # environment:
-    #   name: pdn
 
     steps:
       #- name: SET ENV to staging

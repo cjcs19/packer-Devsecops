@@ -1,0 +1,60 @@
+name: Packer
+
+on:
+  # push:
+  #   branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+    name: packer
+    environment:
+       name: pdn
+
+    # if: endsWith(github.ref,'/develop')
+    # environment:
+    #   name: qa
+    # if: endsWith(github.ref,'/main')
+    # environment:
+    #   name: pdn
+
+    steps:
+      #- name: SET ENV to staging
+      #  if: endsWith(github.ref,'/develop')
+      #  run : |
+      #   #echo "::set-env name=ENVIRONMENT::qa"
+      #   export ENVIRONMENT="qa"
+      #- name: SET ENV to production
+      #  if: endsWith(github.ref,'/main')
+      #  run : |
+      #   #echo "::set-env name=ENVIRONMENT::pdn"
+      #   export ENVIRONMENT="pdn"
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+
+      # validate templates
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: packer/ec2simple.json
+          
+      # BUILD templates
+      - name: BUILD PACKER Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build          
+          target: packer/ec2simple.json
