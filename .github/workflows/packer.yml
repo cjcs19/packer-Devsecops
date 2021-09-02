@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     name: packer
 
-
-    environment:
-          if: endsWith(github.ref,'/develop')
+    if: endsWith(github.ref,'/develop')
+      environment:
           name: qa
-          if: endsWith(github.ref,'/main')
+    if: endsWith(github.ref,'/main')
+      environment:
           name: pdn
 
     steps:
