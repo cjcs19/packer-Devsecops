@@ -14,10 +14,12 @@ jobs:
 
     steps:
       - name: SET ENV to staging
+        uses: cypress-io/github-action@v2
         if: endsWith(github.ref,'/develop')
         run : |
          echo "::set-env name=ENVIRONMENT::qa"
       - name: SET ENV to production
+        uses: cypress-io/github-action@v2∫
         if: endsWith(github.ref,'/main')
         run : |
          echo "::set-env name=ENVIRONMENT::pdn"
