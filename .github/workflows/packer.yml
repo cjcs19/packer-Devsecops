@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     name: packer
 
-    if: endsWith(github.ref,'/develop')
-    environment:
-      name: qa
-    if: endsWith(github.ref,'/main')
-    environment:
-      name: pdn
+    # if: endsWith(github.ref,'/develop')
+    # environment:
+    #   name: qa
+    # if: endsWith(github.ref,'/main')
+    # environment:
+    #   name: pdn
 
     steps:
       #- name: SET ENV to staging
