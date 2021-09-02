@@ -9,20 +9,23 @@ jobs:
     name: packer
 
 
-    #environment:
-    #        name: qa
+    environment:
+          if: endsWith(github.ref,'/develop')
+            name: qa
+          if: endsWith(github.ref,'/main')
+            name: pdn
 
     steps:
-      - name: SET ENV to staging
-        if: endsWith(github.ref,'/develop')
-        run : |
-         #echo "::set-env name=ENVIRONMENT::qa"
-         export ENVIRONMENT="qa"
-      - name: SET ENV to production
-        if: endsWith(github.ref,'/main')
-        run : |
-         #echo "::set-env name=ENVIRONMENT::pdn"
-         export ENVIRONMENT="pdn"
+      #- name: SET ENV to staging
+      #  if: endsWith(github.ref,'/develop')
+      #  run : |
+      #   #echo "::set-env name=ENVIRONMENT::qa"
+      #   export ENVIRONMENT="qa"
+      #- name: SET ENV to production
+      #  if: endsWith(github.ref,'/main')
+      #  run : |
+      #   #echo "::set-env name=ENVIRONMENT::pdn"
+      #   export ENVIRONMENT="pdn"
 
       - name: Checkout Repository
         uses: actions/checkout@v2
