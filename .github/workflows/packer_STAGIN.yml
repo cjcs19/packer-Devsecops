@@ -1,7 +1,8 @@
 name: Packer
 
-push:
-    branches: [ develop ]
+on:
+  push:
+      branches: [ develop ]
 
 jobs:
   packer:
