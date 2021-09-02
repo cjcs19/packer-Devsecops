@@ -1,8 +1,11 @@
-name: Packer
+name: Packer_stagin
 
 on:
   push:
       branches: [ develop ]
+  # paths:
+  #   - 'packer/**'
+  #   - '.github/workflows/packer_STAGIN.yml'
 
 jobs:
   packer:
