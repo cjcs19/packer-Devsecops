@@ -13,14 +13,14 @@ jobs:
     #        name: qa
 
     steps:
-      -name: SET ENV to staging
-      if: endsWith(github.ref,'/develop')
+      - name: SET ENV to staging
+        if: endsWith(github.ref,'/develop')
         run : |
-        echo "::set-env name=ENVIRONMENT::qa"
-      -name: SET ENV to production
-      if: endsWith(github.ref,'/main')
+         echo "::set-env name=ENVIRONMENT::qa"
+      - name: SET ENV to production
+        if: endsWith(github.ref,'/main')
         run : |
-        echo "::set-env name=ENVIRONMENT::pdn"
+         echo "::set-env name=ENVIRONMENT::pdn"
 
       - name: Checkout Repository
         uses: actions/checkout@v2
