@@ -11,9 +11,9 @@ jobs:
 
     environment:
           if: endsWith(github.ref,'/develop')
-            name: qa
+          name: qa
           if: endsWith(github.ref,'/main')
-            name: pdn
+          name: pdn
 
     steps:
       #- name: SET ENV to staging
