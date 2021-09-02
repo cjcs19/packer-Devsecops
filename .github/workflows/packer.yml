@@ -18,11 +18,13 @@ jobs:
         if: endsWith(github.ref,'/develop')
         run : |
          echo "::set-env name=ENVIRONMENT::qa"
+         #export ENVIRONMENT="qa"
       - name: SET ENV to production
-        uses: cypress-io/github-action@v2∫
+        uses: cypress-io/github-action@v2
         if: endsWith(github.ref,'/main')
         run : |
          echo "::set-env name=ENVIRONMENT::pdn"
+         #export ENVIRONMENT="pdn"
 
       - name: Checkout Repository
         uses: actions/checkout@v2
