@@ -5,6 +5,10 @@ on:
     branches:
       - develop
 
+env:
+  UserApi: ${secrets.UserAPI}
+  PasswordApi: ${secrets.PasswordAPI}
+
 jobs:
   action_build:
     runs-on: ubuntu-latest
