@@ -6,8 +6,8 @@ on:
       - develop
 
 env:
-  UserApi: ${secrets.UserAPI}
-  PasswordApi: ${secrets.PasswordAPI}
+  UserApi: ${{secrets.UserAPI}}
+  PasswordApi: ${{secrets.PasswordAPI}}
 
 jobs:
   action_build:
