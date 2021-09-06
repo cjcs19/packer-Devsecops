@@ -10,13 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Run JMeter Action
-        uses: ./
+      - name: Run JMeter Tests
+        uses: rbhadti94/apache-jmeter-action@v0.3.1
         with:
           testFilePath: tests/Condor-Sura-API.jmx
           outputReportsFolder: reports/
-          args: "--loglevel INFO"
 
       - uses: actions/upload-artifact@v1
         with:
