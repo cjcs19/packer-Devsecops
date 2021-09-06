@@ -1,54 +1,24 @@
-name: Packer_stagin
+name: Test JMeter Action
 
 on:
   push:
-      branches: [ develop ]
-  # paths:
-  #   - 'packer/**'
-  #   - '.github/workflows/packer_STAGIN.yml'
+    branches:
+      - develop
 
 jobs:
-  packer:
+  action_build:
     runs-on: ubuntu-latest
-    name: packer
-    environment:
-       name: qa
-
-
     steps:
-      #- name: SET ENV to staging
-      #  if: endsWith(github.ref,'/develop')
-      #  run : |
-      #   #echo "::set-env name=ENVIRONMENT::qa"
-      #   export ENVIRONMENT="qa"
-      #- name: SET ENV to production
-      #  if: endsWith(github.ref,'/main')
-      #  run : |
-      #   #echo "::set-env name=ENVIRONMENT::pdn"
-      #   export ENVIRONMENT="pdn"
+      - uses: actions/checkout@v2
 
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Run JMeter Action
+        uses: ./
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          testFilePath: tests/Condor-Sura-API.jmx
+          outputReportsFolder: reports/
+          args: "--loglevel INFO"
 
-
-      # validate templates
-      - name: Validate Template
-        uses: hashicorp/packer-github-actions@master
+      - uses: actions/upload-artifact@v1
         with:
-          command: validate
-          arguments: -syntax-only
-          target: packer/ec2simple.json
-          
-      # BUILD templates
-      - name: BUILD PACKER Template
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: build          
-          target: packer/ec2simple.json
+          name: jmeter-test-results
+          path: reports/
